@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/issues
+Content-Type: application/json
+
+{
+"title": "Hello world",
+"description": "How are u doing today"
+}
+
+###
