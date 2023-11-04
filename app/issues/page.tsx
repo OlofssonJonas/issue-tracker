@@ -1,8 +1,7 @@
 import { Button, Table } from '@radix-ui/themes'
 import React from 'react'
-import Link from 'next/link'
+import Link from '../components/Link'
 import prisma from '@/prisma/client'
-
 import IssueStatusBadge from '../components/IssueStatusBadge'
 import delay from 'delay'
 import IssueAction from './IssueAction'
@@ -19,7 +18,6 @@ const IssuesPage = async () => {
     <Table.Root variant='surface'>
         <Table.Header>
       <Table.Row>
-        
         <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
         <Table.ColumnHeaderCell className='hidden md:table-cell'>Status</Table.ColumnHeaderCell>
         <Table.ColumnHeaderCell className='hidden md:table-cell'>Created</Table.ColumnHeaderCell>
