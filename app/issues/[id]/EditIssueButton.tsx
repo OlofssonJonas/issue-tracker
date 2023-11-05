@@ -6,7 +6,7 @@ import Link from 'next/link'
   return (
     <Button>
     <Pencil2Icon />
-    <Link href={`/issue/${issueId}/edit`}>Edit issue</Link>
+    <Link href={`/issues/${issueId}/edit`}>Edit issue</Link>
     </Button>
   )
 }
