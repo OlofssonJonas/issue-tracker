@@ -15,4 +15,9 @@ Content-Type: application/json
 "title": "Bug 1+",
 "description": "Update bug 1"
 }
+
+###
+
+DELETE http://localhost:3000/api/issues/7
+
 ###
