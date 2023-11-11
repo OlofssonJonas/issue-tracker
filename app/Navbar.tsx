@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AiFillBug } from 'react-icons/ai'
+import Skeleton from './components/Skeleton'
 
 const links = [
     { label: 'Dashboad', href: '/' },
@@ -23,42 +24,41 @@ const Navbar = () => {
             <Link href="/"><AiFillBug /></Link>
               <NavLinks />
           </Flex>
-            <AuthLink />
+            <AuthStatus />
         </Flex>
       </Container>
     </nav>
   )
 }
-
 export default Navbar
 
 
-const AuthLink = () => {
+const AuthStatus = () => {
   const { status, data: session} = useSession()
 
-  if( status === 'loading') return null
+  if( status === 'loading') return <Skeleton width="3rem" />
   
   if( status === 'unauthenticated') return (
   <Link className="nav-link" href="/api/auth/signin">Log in</Link>)
 
    return (
-    <Box>
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger>
-                <Avatar src={session!.user?.image!} fallback='?' 
-                radius='full' size='2' className='cursor-pointer' />
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Content>
-                <DropdownMenu.Label>
-                <Text size='3'>
-                {session!.user?.email}
-                </Text>
-                </DropdownMenu.Label>
-                <DropdownMenu.Item>
-                   <Link href="/api/auth/signout">Log out</Link>
-                </DropdownMenu.Item>
-              </DropdownMenu.Content>
-            </DropdownMenu.Root>
+      <Box>
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>
+            <Avatar src={session!.user?.image!} fallback='?' 
+            radius='full' size='2' className='cursor-pointer' />
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.Label>
+            <Text size='3'>
+            {session!.user?.email}
+            </Text>
+            </DropdownMenu.Label>
+            <DropdownMenu.Item>
+                <Link href="/api/auth/signout">Log out</Link>
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
         </Box>
    )
 }
