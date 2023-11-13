@@ -13,12 +13,12 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/api/issues/2
+PATCH http://localhost:3000/api/issues/20
 Content-Type: application/json
 
 {
-"title": "Bug 1+",
-"description": "Update bug 1"
+"assignedToUserId": null
+
 }
 
 ###
