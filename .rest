@@ -7,8 +7,9 @@ POST http://localhost:3000/api/issues
 Content-Type: application/json
 
 {
-"title": ""
-"description": ""
+"title": "New issue"
+"description": "hello"
+"statud": "In Progress"
 }
 
 ###
