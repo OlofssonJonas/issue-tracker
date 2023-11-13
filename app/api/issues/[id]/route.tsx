@@ -1,15 +1,14 @@
 import authOptions from "@/app/auth/authOptions";
 import { issueSchema, patchIssueSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
-import delay from "delay";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 
 export async function PATCH(request: NextRequest, { params }: { params: { id: string}})  {
-    const session = await getServerSession(authOptions)
-    if(!session) 
-    return NextResponse.json({}, { status: 401 })
+    // const session = await getServerSession(authOptions)
+    // if(!session) 
+    // return NextResponse.json({}, { status: 401 })
 
     const body = await request.json()
     const validation = patchIssueSchema.safeParse(body)
@@ -18,7 +17,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     
     const { assignedToUserId, title, description } = body 
     if(assignedToUserId) {
-        const user = await prisma.issue.findUnique({
+        const user = await prisma.user.findUnique({
             where: { id: assignedToUserId }
         })
         if(!user)
@@ -38,7 +37,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
             title,
             description,
             assignedToUserId
-        }
+        },
     })
     return NextResponse.json(updatedIssue)
 }
