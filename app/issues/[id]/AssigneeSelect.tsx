@@ -21,10 +21,17 @@ const AssigneeSelect = ({ issue }: { issue: Issue}) => {
   if(error) return null
 
   return (
+    <>
     <Select.Root 
     defaultValue={issue.assignedToUserId || ""}
-    onValueChange={(userId) => {
-      axios.patch('/api/issues/' + issue.id, { assignedToUserId: userId})
+    onValueChange={async(userId) => {
+   
+         axios.patch('/xapi/issues/' + issue.id,
+        { assignedToUserId: userId,
+        })
+        .catch(() => {
+          toast.error('Changes could not be saved')
+        })
     }}>
       <Select.Trigger placeholder='Assign...' />
           <Select.Content>
@@ -32,11 +39,13 @@ const AssigneeSelect = ({ issue }: { issue: Issue}) => {
                   <Select.Label>Suggestions</Select.Label>
                   <Select.Item value={null}>Unassigned</Select.Item>
                   { users?.map(user => (
-                  <Select.Item key={user.id} value={user.id}>{user.name}</Select.Item>
-                  ))}
+                    <Select.Item key={user.id} value={user.id}>{user.name}</Select.Item>
+                    ))}
               </Select.Group>
           </Select.Content>
     </Select.Root>
+    <Toaster />
+    </>
   )
 }
 
