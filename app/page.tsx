@@ -4,6 +4,7 @@ import LatestIssue from "./LatestIssue";
 import Pagination from "./components/Pagination";
 import IssueChart from "./IssueChart";
 import { Grid, Flex } from "@radix-ui/themes";
+import { Metadata } from "next";
 
 
 export default async function Home() {
@@ -24,4 +25,7 @@ export default async function Home() {
     )
   }
   
-  // <IssueChart open={open} closed={closed} inProgress={inProgress} />
+export const metadata: Metadata = {
+  title: 'Issue Tracker - Dashboard',
+  description: 'View a summary of project issues' 
+}
